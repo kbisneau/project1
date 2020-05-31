@@ -29,7 +29,7 @@ def index():
 def login():
     return render_template("login.html")
 
-@app.route("/test")
+@app.route("/testapi")
 def test():
     import requests
     res = requests.get("https://www.goodreads.com/book/review_counts.json",
@@ -43,10 +43,15 @@ def account():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
-        #do whatever
-        return ('form POST')
+        #save user data to DB (check if already exists)
+        #add user info to session to log user in
+        return ('Registration Info Received')
 
     return render_template('register.html') #UPDATE: If user is logged in, dont show register
+
+@app.route('/alert')
+def alert():
+    return render_template("index.html", alert=1, alertmsg="Testing Success Message", alertstyle="success")
 
 if __name__ == '__main__':
     app.run()
